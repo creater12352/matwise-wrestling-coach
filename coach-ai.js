@@ -34,3 +34,31 @@
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
+
+;(()=>{
+ const boot=()=>{
+  const root=document.getElementById('finishCoach');
+  if(!root){setTimeout(boot,250);return}
+  if(root.querySelector('#sprawlCoach'))return;
+  const panel=document.createElement('section');panel.id='sprawlCoach';panel.className='trainer-panel';
+  panel.innerHTML='<div class="eyebrow">DEFENSE · SPRAWL COACH</div><h3>Build a better sprawl</h3><p>Pick the moment that gives you trouble for a short, local coaching cue. No API key or video upload needed.</p><div class="trainer-controls"><label>WHAT IS HAPPENING?<select id="scSituation"><option value="shot">They shoot in from space</option><option value="leg">They have a leg and are driving</option><option value="finish">I sprawled but they keep coming</option><option value="reset">I need to recover my stance</option></select></label><label>WHAT SHOULD I FOCUS ON?<select id="scCue"><option value="hips">Hips back and heavy</option><option value="head">Head up and safe pressure</option><option value="angle">Circle to an angle</option><option value="legs">Legs back, deny the entry</option><option value="recover">Recover to stance</option></select></label></div><button id="scGo" type="button">SHOW SPRAWL CUE</button><div id="scAdvice" class="g-answer" aria-live="polite">Start from a balanced stance: hips under you, hands ready, eyes forward. Move your feet before reaching.</div><p class="g-privacy">Practice slowly with a coach and trained partner on a mat. Keep pressure on the shoulders or upper back—never the neck. If a leg is trapped or you lose balance, release safely and reset.</p>';
+  root.append(panel);
+  const style=document.createElement('style');style.textContent='#sprawlCoach{margin:18px 0;padding:18px;background:var(--panel);border:1px solid var(--line)}#sprawlCoach h3{font:500 22px var(--display);margin:8px 0}#sprawlCoach>p{font-size:12px;line-height:1.55;color:var(--muted)}#sprawlCoach .trainer-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}#sprawlCoach label{display:flex;flex-direction:column;gap:8px;font:10px var(--mono);letter-spacing:.05em;color:var(--lime)}#sprawlCoach select{min-width:0;min-height:44px;padding:10px;background:var(--panel2);border:1px solid var(--line);color:var(--white);font:13px inherit}#sprawlCoach button{min-height:42px;padding:0 13px;background:var(--lime);border:1px solid var(--lime);color:#131711;font:600 10px var(--mono)}#sprawlCoach .g-answer{white-space:pre-wrap;margin-top:12px;padding:14px;background:var(--panel2);border-left:2px solid var(--lime);font-size:13px;line-height:1.65;color:var(--white)}#sprawlCoach .g-privacy{font-size:10px;line-height:1.55;color:var(--muted)}@media(max-width:520px){#sprawlCoach{padding:14px}}';document.head.append(style);
+  const advice={
+   'shot|hips':'Sprawl cue: throw your legs back as your hips travel down and away from the shot. Keep your feet active so your weight stays over your base; do not fold at the waist or drop straight onto your knees. Next rep: sprawl, freeze for one count, then circle.',
+   'shot|head':'Sprawl cue: keep your head up and eyes forward. Place controlled chest/shoulder pressure across the upper back or shoulders—never the neck. Keep your hands ready to block the shoulders. Next rep: sprawl with a tall neck, then circle to an angle.',
+   'shot|angle':'Sprawl cue: after your hips stop the forward drive, move your feet around the corner instead of pushing straight back. Keep a hand on the upper arm or shoulder as you circle. Next rep: sprawl, take two small circle steps, and regain position.',
+   'shot|legs':'Sprawl cue: send both legs back before the opponent connects to your hips. Keep your knees off the mat when possible and hands ready to block. Next rep: start at safe distance and sprawl as soon as they change levels.',
+   'leg|hips':'They have a leg: move your hips back and down while keeping balance over your feet. Keep the captured knee pointing naturally; do not twist it. Use a coach-taught hand position to control the shoulder/upper arm, then circle or safely reset.',
+   'leg|head':'They have a leg: keep your head up and shoulders engaged; avoid pushing on the head or neck. Keep your balance and use trained-partner hand fighting to create space. If you cannot free the leg safely, stop and reset with your coach.',
+   'leg|angle':'They have a leg: keep your hips back, then take small steps to turn toward an open angle. Do not spin over a trapped knee. Ask a coach to check your hand position and partner pressure before drilling this live.',
+   'leg|legs':'They have a leg: widen your base only as needed and keep your hips back; do not hop or wrench the trapped leg. Use a controlled hand fight to clear the grip, or pause and reset with your coach.',
+   'finish|hips':'They keep driving: keep your hips heavy and feet moving—avoid posting both hands on the mat. If your base is breaking, release pressure safely and rebuild your stance rather than forcing a turn.',
+   'finish|angle':'They keep driving: maintain hip pressure, then circle in short steps toward open space. Keep control of the upper arm/shoulder without touching the neck. If the angle closes, reset instead of forcing a spin.',
+   'reset|recover':'To recover: create space with a small circle, bring one foot underneath you, then the other, and return to a balanced stance with hands up. Do not stand straight up while your partner still has a leg; clear control first with a coach.',
+   'reset|hips':'To recover: keep your hips back while you make space, then step your feet under you one at a time. Keep your head up and hands ready. If the partner still controls your leg, ask your coach for a safe reset.'
+  };
+  panel.querySelector('#scGo').onclick=()=>{const situation=panel.querySelector('#scSituation').value,cue=panel.querySelector('#scCue').value;panel.querySelector('#scAdvice').textContent=advice[situation+'|'+cue]||advice[situation+'|angle']||advice['reset|recover'];};
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
