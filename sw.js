@@ -1,4 +1,4 @@
-const CACHE='matwise-v16';
+const CACHE='matwise-v17';
 const FILES=['./','./index.html','./style.css','./app.js','./coach-ai.js','./manifest.webmanifest','./icon.svg'];
 self.addEventListener('install',event=>event.waitUntil(Promise.all([caches.open(CACHE).then(cache=>cache.addAll(FILES)),self.skipWaiting()])));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('matwise-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
